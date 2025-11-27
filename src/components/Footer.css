@@ -1,0 +1,20 @@
+.app-footer {
+  background-color: #f0f2f5;
+  padding: 20px 0;
+  text-align: center;
+  margin-top: auto;
+  border-top: 1px solid #e8e8e8;
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-content p {
+  margin: 0;
+  color: #8c8c8c;
+  font-size: 14px;
+}
+

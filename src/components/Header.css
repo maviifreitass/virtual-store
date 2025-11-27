@@ -1,0 +1,86 @@
+.app-header {
+  background-color: #e8f0f7;
+  padding: 15px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  font-size: 32px;
+  color: #ff6b35;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff6b35;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #ff6b35;
+}
+
+.search-section {
+  flex: 1;
+  max-width: 500px;
+}
+
+.actions-section {
+  display: flex;
+  gap: 15px;
+  margin-left: auto;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  transition: color 0.3s;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.action-button:hover {
+  color: #ff6b35;
+  background-color: rgba(255, 107, 53, 0.1);
+}
+
+.action-button span {
+  font-weight: 500;
+}
+
