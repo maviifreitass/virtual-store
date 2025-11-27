@@ -1,15 +1,27 @@
 import React from 'react';
-import { Input } from 'antd';
-import { LoginOutlined, ShoppingCartOutlined, ShoppingOutlined } from '@ant-design/icons';
+import { NavLink } from 'react-router-dom';
+import { Button, Input } from 'antd';
+import { ShoppingCartOutlined, ShoppingOutlined } from '@ant-design/icons';
 import './Header.css';
 
 const { Search } = Input;
 
 interface HeaderProps {
-  onSearch?: (value: string) => void;
+  showSearch?: boolean;
+  searchValue?: string;
+  onSearchChange?: (value: string) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onSearch }) => {
+const Header: React.FC<HeaderProps> = ({
+  showSearch = false,
+  searchValue = '',
+  onSearchChange,
+}) => {
+
+  const handleSearch = (value: string) => {
+    onSearchChange?.(value);
+  };
+
   return (
     <header className="app-header">
       <div className="header-container">
@@ -17,29 +29,36 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
           <ShoppingOutlined className="logo-icon" />
           <span className="logo-text">Online Shop</span>
         </div>
-        
+
         <nav className="nav-menu">
-          <a href="/" className="nav-link">Home</a>
+          <NavLink
+            to="/"
+            className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/products"
+            className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+          >
+            Products
+          </NavLink>
         </nav>
-        
-        <div className="search-section">
-          <Search
-            placeholder="Camiseta Jeans"
-            allowClear
-            onSearch={onSearch}
-            style={{ width: 600 }}
-          />
-        </div>
-        
+
+        {showSearch && (
+          <div className="search-section">
+            <Search
+              placeholder="Find Product"
+              allowClear
+              value={searchValue}
+              onChange={(event) => handleSearch(event.target.value)}
+              onSearch={handleSearch}
+            />
+          </div>
+        )}
+
         <div className="actions-section">
-          <button className="action-button">
-            <LoginOutlined />
-            <span>Login</span>
-          </button>
-          <button className="action-button">
-            <ShoppingCartOutlined />
-            <span>Carrinho</span>
-          </button>
+          <Button icon={<ShoppingCartOutlined />}>Carrinho</Button>
         </div>
       </div>
     </header>

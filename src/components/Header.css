@@ -1,7 +1,7 @@
 .app-header {
   background-color: #e8f0f7;
   padding: 15px 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -13,7 +13,7 @@
   padding: 0 20px;
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 24px;
 }
 
 .logo-section {
@@ -46,6 +46,7 @@
   transition: color 0.3s;
 }
 
+.nav-link.active,
 .nav-link:hover {
   color: #ff6b35;
 }
@@ -56,31 +57,57 @@
 }
 
 .actions-section {
-  display: flex;
-  gap: 15px;
   margin-left: auto;
-}
-
-.action-button {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  color: #333;
-  transition: color 0.3s;
+  gap: 16px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: 8px 12px;
-  border-radius: 4px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-.action-button:hover {
-  color: #ff6b35;
-  background-color: rgba(255, 107, 53, 0.1);
+.user-details {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
 }
 
-.action-button span {
-  font-weight: 500;
+.user-name {
+  font-weight: 600;
+  color: #1f1f1f;
+  text-transform: capitalize;
+}
+
+.user-email {
+  font-size: 13px;
+  color: #8c8c8c;
+}
+
+.logout-button {
+  padding: 0;
+}
+
+@media (max-width: 992px) {
+  .header-container {
+    flex-wrap: wrap;
+  }
+
+  .search-section {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .actions-section {
+    width: 100%;
+    justify-content: flex-end;
+  }
 }
 

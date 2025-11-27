@@ -1,22 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Card, Spin, Image, notification } from 'antd';
 import { EyeFilled } from '@ant-design/icons';
+import { Product } from '../../types';
 import './Home.css';
 
 const { Meta } = Card;
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-}
 
 const Home: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -39,7 +27,6 @@ const Home: React.FC = () => {
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : 'An error occurred';
         setError(errorMessage);
-        console.error('Error fetching products:', err);
       } finally {
         setLoading(false);
       }
@@ -54,8 +41,11 @@ const Home: React.FC = () => {
 
   const handleEyeClick = (product: Product) => {
     notification.error({
-      title: 'Product View Error',
+      title: 'Error Notification',
+      message: product.title,
       description: `Failed to view details for "${product.title}". Please try again later.`,
+      placement: 'topRight',
+      duration: 4,
     });
   };
 
