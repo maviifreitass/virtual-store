@@ -1,0 +1,26 @@
+body.light {
+  --bg: #f4f4f4;
+  --text: #111;
+  --card-bg: #fff;
+}
+
+body.dark {
+  --bg: #111;
+  --text: #f4f4f4;
+  --card-bg: #1a1a1a;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background .2s ease, color .2s ease;
+}
+
+header, footer {
+  background: var(--card-bg);
+  transition: background .2s ease;
+}
+
+.card {
+  background: var(--card-bg);
+}

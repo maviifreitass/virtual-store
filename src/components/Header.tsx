@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Button, Input } from 'antd';
 import { ShoppingCartOutlined, ShoppingOutlined } from '@ant-design/icons';
+import ThemeSwitcher from './ThemeSwitcher';
 import './Header.css';
 
 const { Search } = Input;
@@ -29,6 +30,7 @@ const Header: React.FC<HeaderProps> = ({
           <ShoppingOutlined className="logo-icon" />
           <span className="logo-text">Online Shop</span>
         </div>
+        <ThemeSwitcher />
 
         <nav className="nav-menu">
           <NavLink

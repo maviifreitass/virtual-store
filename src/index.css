@@ -4,6 +4,33 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg: #f0f2f5;
+  --text: #000000;
+  --card-bg: #ffffff;
+  --header-bg: #ffffff;
+  --footer-bg: #ffffff;
+  --muted: rgba(0, 0, 0, 0.45);
+}
+
+body.light {
+  --bg: #f0f2f5;
+  --text: #000000;
+  --card-bg: #ffffff;
+  --header-bg: #ffffff;
+  --footer-bg: #ffffff;
+  --muted: rgba(0, 0, 0, 0.45);
+}
+
+body.dark {
+  --bg: #141414;
+  --text: #e6eef8;
+  --card-bg: #1f1f1f;
+  --header-bg: #111214;
+  --footer-bg: #111214;
+  --muted: rgba(255, 255, 255, 0.65);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -11,7 +38,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f0f2f5;
+  background-color: var(--bg);
+  color: var(--text);
 }
 
 code {
@@ -23,4 +51,41 @@ code {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* Basic overrides for antd components to better match the theme */
+.ant-card {
+  background: var(--card-bg) !important;
+  color: var(--text) !important;
+}
+
+.app-header {
+  background: var(--header-bg);
+  color: var(--text);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.app-footer {
+  background: var(--footer-bg);
+  color: var(--text);
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Muted text */
+.text-muted {
+  color: var(--muted);
+}
+
+/* Ensure inputs and areas inherit readable colors */
+.ant-input,
+.ant-select-selector,
+.ant-btn {
+  color: var(--text);
+}
+
+/* Theme switcher spacing */
+.theme-switcher {
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
 }
