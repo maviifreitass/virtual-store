@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 import './styles/global.css';
+import Clients from './pages/Clients';
 
 const AppContent = () => {
   const location = useLocation();
@@ -33,6 +34,7 @@ const AppContent = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products searchTerm={productSearch} />} />
+          <Route path="/clients" element={<Clients />} />
         </Routes>
       </main>
       <Footer />

@@ -78,8 +78,11 @@ code {
 
 /* Ensure inputs and areas inherit readable colors */
 .ant-input,
-.ant-select-selector,
-.ant-btn {
+.ant-select-selector {
+  color: var(--text);
+}
+
+.ant-btn-default {
   color: var(--text);
 }
 

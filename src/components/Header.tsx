@@ -30,7 +30,6 @@ const Header: React.FC<HeaderProps> = ({
           <ShoppingOutlined className="logo-icon" />
           <span className="logo-text">Online Shop</span>
         </div>
-        <ThemeSwitcher />
 
         <nav className="nav-menu">
           <NavLink
@@ -44,6 +43,12 @@ const Header: React.FC<HeaderProps> = ({
             className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
           >
             Products
+          </NavLink>
+          <NavLink
+            to="/clients"
+            className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+          >
+            Clients
           </NavLink>
         </nav>
 
@@ -60,6 +65,7 @@ const Header: React.FC<HeaderProps> = ({
         )}
 
         <div className="actions-section">
+          <ThemeSwitcher />
           <Button icon={<ShoppingCartOutlined />}>Carrinho</Button>
         </div>
       </div>
