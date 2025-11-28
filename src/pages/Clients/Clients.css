@@ -1,0 +1,19 @@
+.clients-page {
+  padding: 40px;
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+.clients-table {
+  margin-top: 30px;
+}
+
+.action-icon {
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--text);
+}
+
+.action-icon.delete {
+  color: #ff4d4f;
+}

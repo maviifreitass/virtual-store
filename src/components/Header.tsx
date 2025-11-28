@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Button, Input } from 'antd';
 import { ShoppingCartOutlined, ShoppingOutlined } from '@ant-design/icons';
+import ThemeSwitcher from './ThemeSwitcher';
 import './Header.css';
 
 const { Search } = Input;
@@ -43,6 +44,12 @@ const Header: React.FC<HeaderProps> = ({
           >
             Products
           </NavLink>
+          <NavLink
+            to="/clients"
+            className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+          >
+            Clients
+          </NavLink>
         </nav>
 
         {showSearch && (
@@ -58,6 +65,7 @@ const Header: React.FC<HeaderProps> = ({
         )}
 
         <div className="actions-section">
+          <ThemeSwitcher />
           <Button icon={<ShoppingCartOutlined />}>Carrinho</Button>
         </div>
       </div>

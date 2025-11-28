@@ -283,7 +283,7 @@ const Products = ({ searchTerm }: ProductsProps) => {
         )}
 
         {loadingProducts ? (
-          <Spin tip="Carregando produtos..." size="large">
+          <Spin tip="Loading Products..." size="large">
             <Skeleton active style={{ marginTop: token.marginXL }} />
           </Spin>
         ) : (
