@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Flex, Form, Typography } from 'antd';
+import { Button, Flex, Form, Typography, Spin, Skeleton } from 'antd';
 import { PlusOutlined, UserOutlined } from '@ant-design/icons';
 import { useClients } from './useClients';
 import { ClientsTable } from './ClientsTable';
@@ -65,12 +65,18 @@ const Clients = () => {
         </Button>
       </Flex>
 
-      <ClientsTable
-        clients={clients}
-        loading={loading}
-        onEdit={handleEdit}
-        onDelete={setDeleteId}
-      />
+      {loading ? (
+        <Spin tip="Loading Clients..." size="large" fullscreen>
+          <Skeleton active style={{ marginTop: 24 }} />
+        </Spin>
+      ) : (
+        <ClientsTable
+          clients={clients}
+          loading={loading}
+          onEdit={handleEdit}
+          onDelete={setDeleteId}
+        />
+      )}
 
       <ClientModal
         open={modalOpen}

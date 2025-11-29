@@ -68,7 +68,7 @@ const Home: React.FC = () => {
         
         {loading ? (
           <div className="loading-container">
-            <Spin size="large" tip="Loading products..." />
+            <Spin size="large" tip="Loading products..." fullscreen />
           </div>
         ) : (
           <div className="products-grid">

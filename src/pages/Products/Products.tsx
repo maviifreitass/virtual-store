@@ -25,6 +25,7 @@ import {
   setCustomProducts,
   updateCustomProduct,
 } from '../../redux/slices/productsSlice';
+import { addToCart } from '../../redux/slices/cartSlice';
 
 const PRODUCTS_URL = 'https://fakestoreapi.com/products';
 const CATEGORIES_URL = 'https://fakestoreapi.com/products/categories';
@@ -129,6 +130,7 @@ const Products = ({ searchTerm }: ProductsProps) => {
   }, [combinedProducts, searchTerm]);
 
   const handleBuy = (product: Product) => {
+    dispatch(addToCart(product));
     messageApi.success(`${product.title} adicionado ao carrinho!`);
   };
 
@@ -252,7 +254,7 @@ const Products = ({ searchTerm }: ProductsProps) => {
       {contextHolder}
 
       <Flex justify="space-between" align="center" wrap="wrap" gap={token.marginMD}>
-        <Space direction="vertical" size={0}>
+        <Space orientation="vertical" size={0}>
           <Typography.Text type="secondary">Online Shop</Typography.Text>
           <Typography.Title level={3} style={{ margin: 0 }}>
             List of Products
@@ -283,7 +285,7 @@ const Products = ({ searchTerm }: ProductsProps) => {
         )}
 
         {loadingProducts ? (
-          <Spin tip="Loading Products..." size="large">
+          <Spin tip="Loading Products..." size="large" fullscreen>
             <Skeleton active style={{ marginTop: token.marginXL }} />
           </Spin>
         ) : (

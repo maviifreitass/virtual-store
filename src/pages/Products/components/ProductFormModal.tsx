@@ -44,7 +44,7 @@ const ProductFormModal = ({
       }}
       maskClosable={false}
       keyboard={false}
-      destroyOnClose
+      destroyOnHidden
       styles={{
         header: { borderBottom: `1px solid ${token.colorBorderSecondary}` },
         footer: { borderTop: `1px solid ${token.colorBorderSecondary}` },

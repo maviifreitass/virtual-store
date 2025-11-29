@@ -22,6 +22,7 @@ const ProductEditDrawer = ({
   onSubmit,
   onClose,
 }: ProductEditDrawerProps) => {
+
   const [form] = Form.useForm<ProductFormValues>();
 
   useEffect(() => {
@@ -38,6 +39,9 @@ const ProductEditDrawer = ({
     }
   }, [product, open, form]);
 
+
+  if (!open) return null;
+
   const handleFinish = async (values: ProductFormValues) => {
     await onSubmit(values);
   };
@@ -46,11 +50,11 @@ const ProductEditDrawer = ({
     <Drawer
       title="Editar Produto"
       placement="right"
-      destroyOnClose
+      destroyOnHidden
       maskClosable={false}
       onClose={onClose}
       open={open}
-      width={520}
+      size="large"
       footer={
         <Space style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button onClick={onClose}>Cancelar</Button>

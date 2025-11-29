@@ -46,3 +46,8 @@ export interface Cart {
   }>;
 }
 
+// Cart Item type for Redux state
+export interface CartItem {
+  product: Product;
+  quantity: number;
+}
