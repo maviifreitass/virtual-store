@@ -11,7 +11,7 @@ import {
   selectClientsLoading,
   type Client,
 } from '../../redux/slices/clientsSlice';
-import { fakeStoreApi } from '../../services/fakeStoreApi';
+import { usersService } from '../../services/usersService';
 
 const STORAGE_KEY = 'online-shop.clients';
 
@@ -52,7 +52,7 @@ export const useClients = () => {
           return;
         }
 
-        const data = await fakeStoreApi.getUsers();
+        const data = await usersService.getAll();
 
         const adapted: Client[] = data.map((u: any) => ({
           id: u.id,

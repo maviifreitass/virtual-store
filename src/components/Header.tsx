@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Badge, Button, Drawer, Input } from 'antd';
-import { MenuOutlined, ShoppingCartOutlined, ShoppingOutlined } from '@ant-design/icons';
+import { MenuOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import ThemeSwitcher from './ThemeSwitcher';
 import CartModal from '../pages/Products/components/CartModal';
 import { useAppSelector } from '../redux/hooks';
 import { selectCartItemsCount } from '../redux/slices/cartSlice';
+import logoImg from '../assets/online-shop-logo.png';
 import './Header.css';
 
 const { Search } = Input;
@@ -54,8 +55,7 @@ const Header: React.FC<HeaderProps> = ({
       <header className="app-header">
         <div className="header-container">
           <div className="logo-section">
-            <ShoppingOutlined className="logo-icon" />
-            <span className="logo-text">Online Shop</span>
+            <img src={logoImg} alt="Online Shop" className="logo-image" />
           </div>
 
           <nav className="nav-menu desktop-nav">{renderNavLinks()}</nav>

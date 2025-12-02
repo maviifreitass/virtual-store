@@ -26,8 +26,10 @@ import {
   updateCustomProduct,
 } from '../../redux/slices/productsSlice';
 import { addToCart } from '../../redux/slices/cartSlice';
-import { fakeStoreApi } from '../../services/fakeStoreApi';
-const STORAGE_KEY = 'online-shop.custom-products';
+import { productsService } from '../../services/productsService';
+import { categoriesService } from '../../services/categoriesService';
+const CUSTOM_PRODUCTS_KEY = 'online-shop.custom-products';
+const REMOTE_PRODUCTS_KEY = 'online-shop.remote-products';
 const FALLBACK_IMAGE =
   'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="260" height="260"><rect width="100%" height="100%" fill="%23f5f5f5"/><text x="50%" y="50%" font-size="20" fill="%23999999" text-anchor="middle" dominant-baseline="middle">No%20image</text></svg>';
 
@@ -54,12 +56,35 @@ const Products = ({ searchTerm }: ProductsProps) => {
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [updatingProduct, setUpdatingProduct] = useState(false);
 
+  const loadCachedRemoteProducts = useCallback(() => {
+    try {
+      if (typeof window === 'undefined') {
+        return;
+      }
+      const stored = localStorage.getItem(REMOTE_PRODUCTS_KEY);
+      if (!stored) {
+        return;
+      }
+      const parsed = JSON.parse(stored) as Product[];
+      if (Array.isArray(parsed)) {
+        setRemoteProducts(parsed);
+        setProductsError(null);
+        setLoadingProducts(false);
+      }
+    } catch {
+      // ignore corrupted cache
+    }
+  }, []);
+
   const loadProducts = useCallback(async () => {
     try {
       setLoadingProducts(true);
-      const data = await fakeStoreApi.getProducts();
+      const data = await productsService.getAll();
       setRemoteProducts(data);
       setProductsError(null);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(REMOTE_PRODUCTS_KEY, JSON.stringify(data));
+      }
     } catch (error) {
       const description =
         error instanceof Error ? error.message : 'Erro inesperado ao carregar os produtos.';
@@ -72,7 +97,7 @@ const Products = ({ searchTerm }: ProductsProps) => {
   const loadCategories = useCallback(async () => {
     try {
       setCategoriesLoading(true);
-      const data = await fakeStoreApi.getCategories();
+      const data = await categoriesService.getAll();
       setCategories(data);
     } catch {
       setCategories([]);
@@ -86,7 +111,7 @@ const Products = ({ searchTerm }: ProductsProps) => {
       if (typeof window === 'undefined') {
         return;
       }
-      const stored = localStorage.getItem(STORAGE_KEY);
+      const stored = localStorage.getItem(CUSTOM_PRODUCTS_KEY);
       if (!stored) {
         return;
       }
@@ -175,20 +200,21 @@ const Products = ({ searchTerm }: ProductsProps) => {
   };
 
   useEffect(() => {
+    loadCachedRemoteProducts();
     loadProducts();
     loadCategories();
     loadStoredProducts();
-  }, [loadProducts, loadCategories, loadStoredProducts]);
+  }, [loadCachedRemoteProducts, loadProducts, loadCategories, loadStoredProducts]);
 
   useEffect(() => {
     if (typeof window === 'undefined') {
       return;
     }
     if (!customProducts.length) {
-      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(CUSTOM_PRODUCTS_KEY);
       return;
     }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(customProducts));
+    localStorage.setItem(CUSTOM_PRODUCTS_KEY, JSON.stringify(customProducts));
   }, [customProducts]);
 
   const handleSaveProduct = async (values: ProductFormValues) => {
@@ -219,7 +245,7 @@ const Products = ({ searchTerm }: ProductsProps) => {
 
   useEffect(() => {
     const handleStorage = (event: StorageEvent) => {
-      if (event.key === STORAGE_KEY) {
+      if (event.key === CUSTOM_PRODUCTS_KEY) {
         loadStoredProducts();
       }
     };

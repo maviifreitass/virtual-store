@@ -1,6 +1,6 @@
 .app-header {
   background-color: var(--header-bg);
-  padding: 15px 0;
+  padding: 4px 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   position: sticky;
   top: 0;
@@ -11,12 +11,12 @@
 .header-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 10px;
 }
 
 .logo-section {
@@ -25,9 +25,10 @@
   gap: 10px;
 }
 
-.logo-icon {
-  font-size: 32px;
-  color: #ff6b35;
+.logo-image {
+  width: 120px;
+  height: 84px;
+  object-fit: contain;
 }
 
 .logo-text {
