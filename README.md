@@ -1,46 +1,76 @@
-# Getting Started with Create React App
+# Online Shop Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicação web construída em React + TypeScript para administrar produtos, clientes e carrinho de compras utilizando dados públicos da Fake Store API. A interface segue os componentes do Ant Design e inclui modo claro/escuro.
 
-## Available Scripts
+## Sumário
+1. [Stack Principal](#stack-principal)
+2. [Arquitetura e Pastas](#arquitetura-e-pastas)
+3. [Pré-requisitos](#pré-requisitos)
+4. [Como Executar](#como-executar)
+5. [Scripts Disponíveis](#scripts-disponíveis)
+6. [Fluxos de Negócio](#fluxos-de-negócio)
+7. [Integração com Fake Store API](#integração-com-fake-store-api)
+8. [Temas e Acessibilidade](#temas-e-acessibilidade)
 
-In the project directory, you can run:
 
-### `npm start`
+## Stack Principal
+- React 18 + TypeScript
+- Ant Design 5
+- Redux Toolkit para estado global (produtos customizados, carrinho e clientes)
+- React Router DOM para navegação
+- Fake Store API como fonte de dados externa
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Arquitetura e Pastas
+- `src/components`: cabeçalho, rodapé e componentes compartilhados (ex.: troca de tema).
+- `src/pages`: telas principais (Home, Products, Clients, etc).
+- `src/redux`: store, hooks e slices (cart, products, clients).
+- `src/contexts`: contextos de autenticação e tema.
+- `src/services`: integrações externas. `fakeStoreApi.ts` expõe um singleton para chamadas REST, garantindo reutilização e ponto único de configuração.
+- `src/types`: contratos compartilhados para Products, Users, CartItems.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Pré-requisitos
+- Node.js 18.x (ou versão LTS mais recente)
+- npm 9.x (instalado junto com o Node)
+- Acesso à internet para consumir a Fake Store API
 
-### `npm test`
+## Como Executar
+1. Instale dependências:
+   ```bash
+   npm install
+   ```
+2. Inicie o servidor de desenvolvimento:
+   ```bash
+   npm start
+   ```
+3. Acesse http://localhost:3000.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Para build de produção:
+```bash
+npm run build
+```
+Os artefatos serão gerados em `build/`.
 
-### `npm run build`
+## Scripts Disponíveis
+- `npm start`: executa a aplicação em modo desenvolvimento.
+- `npm test`: roda a suíte de testes configurada pelo Create React App.
+- `npm run build`: gera o build otimizado de produção.
+- `npm run eject`: expõe as configurações do CRA (irreversível, use apenas se necessário).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Fluxos de Negócio
+- **Produtos**: consulta dados remotos, permite cadastrar itens customizados, editar ou remover e adicioná-los ao carrinho.
+- **Carrinho**: mantém estado global com quantidades, total e ações rápidas (limpar, checkout simulado).
+- **Clientes**: carrega usuários da Fake Store, adapta dados para o domínio e permite CRUD local com persistência em `localStorage`.
+- **Home**: destaca produtos populares e acessos rápidos.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Integração com Fake Store API
+- Todas as chamadas passam por `FakeStoreApi` (singleton em `src/services/fakeStoreApi.ts`), centralizando base URL, tratamento de erros e operações de caching local via Redux/localStorage.
+- Endpoints utilizados:
+  - `GET /products`
+  - `GET /products/categories`
+  - `GET /users`
+- Em caso de falha, a aplicação mostra mensagens contextuais e tenta preservar dados localmente.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Temas e Acessibilidade
+- Suporte a modo claro/escuro via `ThemeContext`.
+- Alternância de tema com ícones do Ant Design (Sun/Moon).
+- Layout responsivo com ajustes específicos para cabeçalho, tabela de clientes e modal do carrinho.

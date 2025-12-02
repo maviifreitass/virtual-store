@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch } from 'antd';
+import { MoonFilled, SunFilled } from '@ant-design/icons';
 import { useTheme } from '../contexts/ThemeContext';
 import './ThemeSwitcher.css';
 
@@ -11,9 +12,9 @@ const ThemeSwitcher: React.FC = () => {
       <Switch
         checked={theme === 'dark'}
         onChange={toggleTheme}
-        checkedChildren="🌙"
-        unCheckedChildren="☀️"
-        aria-label="Toggle theme"
+        checkedChildren={<MoonFilled />}
+        unCheckedChildren={<SunFilled />}
+        aria-label="Alternar tema"
       />
     </div>
   );

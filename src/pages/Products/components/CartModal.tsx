@@ -27,6 +27,7 @@ import {
   updateQuantity,
   clearCart,
 } from '../../../redux/slices/cartSlice';
+import './CartModal.css';
 
 const { Text, Title } = Typography;
 
@@ -101,6 +102,7 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
         onCancel={onClose}
         width={700}
         footer={null}
+        className="cart-modal"
       >
         {isEmpty ? (
           <Empty
@@ -111,10 +113,12 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
         ) : (
           <>
             <List
+              className="cart-modal__list"
               dataSource={cartItems}
               renderItem={(item) => (
                 <List.Item
                   key={item.product.id}
+                  className="cart-modal__item"
                   style={{ padding: '16px 0' }}
                   actions={[
                     <Popconfirm
@@ -136,44 +140,51 @@ const CartModal = ({ open, onClose }: CartModalProps) => {
                     </Popconfirm>,
                   ]}
                 >
-                  <List.Item.Meta
-                    avatar={
-                      <Image
-                        src={item.product.image}
-                        alt={item.product.title}
-                        width={60}
-                        height={60}
-                        style={{ objectFit: 'contain' }}
-                        preview={false}
-                      />
-                    }
-                    title={
-                      <Text strong ellipsis style={{ maxWidth: 300 }}>
-                        {item.product.title}
-                      </Text>
-                    }
-                    description={
-                      <Space direction="vertical" size="small">
-                        <Text type="secondary">
-                          R$ {item.product.price.toFixed(2)} / unidade
+                  <div className="cart-modal__item-info">
+                    <List.Item.Meta
+                      avatar={
+                        <Image
+                          src={item.product.image}
+                          alt={item.product.title}
+                          width={60}
+                          height={60}
+                          style={{ objectFit: 'contain' }}
+                          preview={false}
+                        />
+                      }
+                      title={
+                        <Text strong ellipsis style={{ maxWidth: 300 }}>
+                          {item.product.title}
                         </Text>
-                        <Space>
-                          <Text type="secondary">Quantidade:</Text>
-                          <InputNumber
-                            min={1}
-                            max={99}
-                            value={item.quantity}
-                            onChange={(value) =>
-                              handleQuantityChange(item.product.id, value)
-                            }
+                      }
+                      description={
+                        <Space direction="vertical" size="small" style={{ width: '100%' }}>
+                          <Text type="secondary">
+                            R$ {item.product.price.toFixed(2)} / unidade
+                          </Text>
+                          <Space
+                            className="cart-modal__quantity"
+                            align="center"
                             size="small"
-                            style={{ width: 70 }}
-                          />
+                            wrap
+                          >
+                            <Text type="secondary">Quantidade:</Text>
+                            <InputNumber
+                              min={1}
+                              max={99}
+                              value={item.quantity}
+                              onChange={(value) =>
+                                handleQuantityChange(item.product.id, value)
+                              }
+                              size="middle"
+                              style={{ width: 88 }}
+                            />
+                          </Space>
                         </Space>
-                      </Space>
-                    }
-                  />
-                  <div style={{ textAlign: 'right', minWidth: 100 }}>
+                      }
+                    />
+                  </div>
+                  <div className="cart-modal__item-total">
                     <Title level={5} style={{ margin: 0 }}>
                       R$ {(item.product.price * item.quantity).toFixed(2)}
                     </Title>

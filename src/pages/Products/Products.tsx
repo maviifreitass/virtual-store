@@ -26,9 +26,7 @@ import {
   updateCustomProduct,
 } from '../../redux/slices/productsSlice';
 import { addToCart } from '../../redux/slices/cartSlice';
-
-const PRODUCTS_URL = 'https://fakestoreapi.com/products';
-const CATEGORIES_URL = 'https://fakestoreapi.com/products/categories';
+import { fakeStoreApi } from '../../services/fakeStoreApi';
 const STORAGE_KEY = 'online-shop.custom-products';
 const FALLBACK_IMAGE =
   'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="260" height="260"><rect width="100%" height="100%" fill="%23f5f5f5"/><text x="50%" y="50%" font-size="20" fill="%23999999" text-anchor="middle" dominant-baseline="middle">No%20image</text></svg>';
@@ -59,11 +57,7 @@ const Products = ({ searchTerm }: ProductsProps) => {
   const loadProducts = useCallback(async () => {
     try {
       setLoadingProducts(true);
-      const response = await fetch(PRODUCTS_URL);
-      if (!response.ok) {
-        throw new Error('Não foi possível carregar os produtos.');
-      }
-      const data: Product[] = await response.json();
+      const data = await fakeStoreApi.getProducts();
       setRemoteProducts(data);
       setProductsError(null);
     } catch (error) {
@@ -78,11 +72,7 @@ const Products = ({ searchTerm }: ProductsProps) => {
   const loadCategories = useCallback(async () => {
     try {
       setCategoriesLoading(true);
-      const response = await fetch(CATEGORIES_URL);
-      if (!response.ok) {
-        throw new Error('Não foi possível carregar as categorias.');
-      }
-      const data: string[] = await response.json();
+      const data = await fakeStoreApi.getCategories();
       setCategories(data);
     } catch {
       setCategories([]);

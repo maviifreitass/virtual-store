@@ -104,6 +104,7 @@ export const ClientsTable = ({ clients, loading, onEdit, onDelete }: ClientsTabl
       dataSource={clients}
       rowKey="id"
       className="clients-table"
+      scroll={{ x: 1000 }}
       pagination={{
         pageSize: 10,
         showSizeChanger: true,
