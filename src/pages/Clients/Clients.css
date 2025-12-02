@@ -4,8 +4,21 @@
   min-height: 100vh;
 }
 
+.clients-header {
+  gap: 16px;
+}
+
 .clients-table {
   margin-top: 30px;
+}
+
+.clients-table-wrapper {
+  margin-top: 24px;
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
 }
 
 .action-icon {
@@ -16,4 +29,25 @@
 
 .action-icon.delete {
   color: #ff4d4f;
+}
+
+@media (max-width: 992px) {
+  .clients-page {
+    padding: 32px 20px;
+  }
+
+  .clients-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .clients-page {
+    padding: 24px 16px;
+  }
+
+  .clients-table-wrapper {
+    padding: 12px;
+  }
 }

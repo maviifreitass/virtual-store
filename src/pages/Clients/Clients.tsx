@@ -50,7 +50,7 @@ const Clients = () => {
 
   return (
     <div className="clients-page">
-      <Flex justify="space-between" align="center">
+      <Flex justify="space-between" align="center" className="clients-header" wrap="wrap">
         <Typography.Title level={3} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <UserOutlined />
           List of Clients
@@ -70,12 +70,14 @@ const Clients = () => {
           <Skeleton active style={{ marginTop: 24 }} />
         </Spin>
       ) : (
-        <ClientsTable
-          clients={clients}
-          loading={loading}
-          onEdit={handleEdit}
-          onDelete={setDeleteId}
-        />
+        <div className="clients-table-wrapper">
+          <ClientsTable
+            clients={clients}
+            loading={loading}
+            onEdit={handleEdit}
+            onDelete={setDeleteId}
+          />
+        </div>
       )}
 
       <ClientModal
